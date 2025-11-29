@@ -2,7 +2,7 @@
 
 A production-ready, enterprise-level .NET 8 Web API showcasing Clean Architecture principles, SOLID design, and cloud-ready patterns.
 
-## ??? Architecture Overview
+## Architecture Overview
 
 ```
 ???????????????????????????????????????????????????????????
@@ -16,7 +16,7 @@ A production-ready, enterprise-level .NET 8 Web API showcasing Clean Architectur
 ???????????????????????????????????????????????????????????
 ```
 
-## ?? Project Structure
+## Project Structure
 
 ```
 clean-architecture-dotnet-api/
@@ -53,61 +53,61 @@ clean-architecture-dotnet-api/
 ??? README.md
 ```
 
-## ?? Key Features Implemented
+## Key Features Implemented
 
-### 1. **Domain-Driven Design (DDD)**
+### 1. Domain-Driven Design (DDD)
    - Rich domain entities with business logic encapsulation
    - Value objects for immutable concepts
    - Domain events (future extensibility)
 
-### 2. **Clean Architecture Layers**
-   - **Domain**: Zero dependencies, pure business rules
-   - **Application**: Orchestration using MediatR commands/queries
-   - **Infrastructure**: Data access, external integrations, caching
-   - **API**: HTTP concerns only (controllers, middleware)
+### 2. Clean Architecture Layers
+   - Domain: Zero dependencies, pure business rules
+   - Application: Orchestration using MediatR commands/queries
+   - Infrastructure: Data access, external integrations, caching
+   - API: HTTP concerns only (controllers, middleware)
 
-### 3. **Advanced Async Patterns**
+### 3. Advanced Async Patterns
    - Full async/await implementation
    - Cancellation token support throughout
    - Pipeline behaviors for cross-cutting concerns
 
-### 4. **Data Access**
+### 4. Data Access
    - Entity Framework Core with DbContext
    - Raw SQL queries for complex operations (Dapper integration ready)
    - Database migrations included
 
-### 5. **Security**
+### 5. Security
    - JWT authentication with refresh tokens
    - Role-based authorization
    - Secure token refresh flow with token rotation
 
-### 6. **Caching Strategy**
+### 6. Caching Strategy
    - Redis integration for high-frequency queries
    - Get-by-id pattern with invalidation
    - Cache warming capabilities
 
-### 7. **Error Handling**
+### 7. Error Handling
    - Polymorphic middleware for consistent error responses
    - Domain exceptions with proper HTTP status mapping
    - Detailed error logging
 
-### 8. **API Standards**
+### 8. API Standards
    - OpenAPI/Swagger documentation
    - API versioning (v1, v2 ready)
    - Health checks endpoint
    - Metrics endpoint for monitoring
 
-### 9. **Background Processing**
+### 9. Background Processing
    - Hosted service for async email dispatch
    - Job queue pattern
    - Graceful shutdown support
 
-### 10. **Testing**
+### 10. Testing
    - Unit tests (xUnit, Moq)
    - Integration tests with test containers
    - Repository pattern for testability
 
-## ?? Quick Start
+## Quick Start
 
 ### Prerequisites
 - .NET 8 SDK
@@ -117,12 +117,12 @@ clean-architecture-dotnet-api/
 
 ### Local Development (Without Docker)
 
-1. **Clone & Restore**
+1. Clone & Restore
    ```bash
    dotnet restore
    ```
 
-2. **Configure Database**
+2. Configure Database
    - Update connection string in `appsettings.Development.json`
    - Run migrations:
    ```bash
@@ -130,17 +130,17 @@ clean-architecture-dotnet-api/
    dotnet ef database update --project ../Infrastructure
    ```
 
-3. **Configure Redis**
+3. Configure Redis
    - Ensure Redis is running on localhost:6379
    - Or update connection in appsettings
 
-4. **Run API**
+4. Run API
    ```bash
    cd src/API
    dotnet run
    ```
 
-5. **Access Swagger**
+5. Access Swagger
    - Navigate to: `https://localhost:7001/swagger`
 
 ### Docker Compose (Recommended)
@@ -150,34 +150,34 @@ docker-compose up -d
 ```
 
 Services:
-- **API**: `http://localhost:5000`
-- **Swagger**: `http://localhost:5000/swagger`
-- **SQL Server**: `localhost:1433`
-- **Redis**: `localhost:6379`
-- **Health Check**: `http://localhost:5000/health`
+- API: `http://localhost:5000`
+- Swagger: `http://localhost:5000/swagger`
+- SQL Server: `localhost:1433`
+- Redis: `localhost:6379`
+- Health Check: `http://localhost:5000/health`
 
-## ?? Design Decisions & Rationale
+## Design Decisions & Rationale
 
 ### Why MediatR?
-- **Decouples** command/query handlers from controllers
-- **Enables** pipeline behaviors (logging, validation, caching)
-- **Facilitates** testing without HTTP context
-- **Scales** with features without modifying controllers
+- Decouples command/query handlers from controllers
+- Enables pipeline behaviors (logging, validation, caching)
+- Facilitates testing without HTTP context
+- Scales with features without modifying controllers
 
 ### Why Repository Pattern?
-- **Abstracts** data access details
-- **Enables** swapping implementations (SQL ? NoSQL)
-- **Improves** testability with mock repositories
+- Abstracts data access details
+- Enables swapping implementations (SQL to NoSQL)
+- Improves testability with mock repositories
 
 ### Why Value Objects?
-- **Encapsulates** business rules (e.g., email validation)
-- **Immutable** by design
-- **Type-safe** instead of primitives
+- Encapsulates business rules (e.g., email validation)
+- Immutable by design
+- Type-safe instead of primitives
 
 ### Why CQRS-Light Pattern?
-- **Separates** read/write concerns
-- **Optimizes** queries independently
-- **Scales** read models separately
+- Separates read/write concerns
+- Optimizes queries independently
+- Scales read models separately
 
 ### Redis Caching Strategy
 ```
@@ -192,34 +192,34 @@ UPDATE User:
   3. Return updated entity
 ```
 
-## ?? Scalability Considerations
+## Scalability Considerations
 
 ### Horizontal Scaling
-- **Stateless API**: No session affinity needed
-- **Cache layer**: Redis for shared state
-- **Database**: EF Core supports read replicas
-- **Load balancing**: Deploy multiple API instances behind LB
+- Stateless API: No session affinity needed
+- Cache layer: Redis for shared state
+- Database: EF Core supports read replicas
+- Load balancing: Deploy multiple API instances behind LB
 
 ### Performance Optimizations
-- **Lazy loading disabled** (prevent N+1 queries)
-- **Explicit includes** in queries
-- **Redis caching** for hot data
-- **Background jobs** for async work
-- **Health checks** for LB routing decisions
+- Lazy loading disabled (prevent N+1 queries)
+- Explicit includes in queries
+- Redis caching for hot data
+- Background jobs for async work
+- Health checks for LB routing decisions
 
 ### Security at Scale
-- **JWT tokens** (no session state)
-- **Token rotation** in refresh flow
-- **Rate limiting** ready (add Polly)
-- **Audit logging** for compliance
+- JWT tokens (no session state)
+- Token rotation in refresh flow
+- Rate limiting ready (add Polly)
+- Audit logging for compliance
 
 ### Monitoring & Observability
-- **Health endpoints** for diagnostics
-- **Structured logging** (Serilog ready)
-- **Metrics endpoint** for Prometheus
-- **Correlation IDs** for distributed tracing
+- Health endpoints for diagnostics
+- Structured logging (Serilog ready)
+- Metrics endpoint for Prometheus
+- Correlation IDs for distributed tracing
 
-## ?? Authentication Flow
+## Authentication Flow
 
 ```
 1. Login (POST /auth/login)
@@ -238,11 +238,11 @@ UPDATE User:
    ? Issue new JWT + Refresh token
 ```
 
-## ?? Sample Workflows
+## Sample Workflows
 
 ### Creating a Feature (e.g., User Management)
 
-1. **Domain Layer**
+1. Domain Layer
    ```csharp
    // Domain/Entities/User.cs
    public class User : AggregateRoot
@@ -252,7 +252,7 @@ UPDATE User:
    }
    ```
 
-2. **Application Layer**
+2. Application Layer
    ```csharp
    // Application/Commands/CreateUserCommand.cs
    public record CreateUserCommand(string Email, string Password) : IRequest<UserDto>;
@@ -269,7 +269,7 @@ UPDATE User:
    }
    ```
 
-3. **API Layer**
+3. API Layer
    ```csharp
    // API/Controllers/UsersController.cs
    [HttpPost]
@@ -282,7 +282,7 @@ UPDATE User:
    }
    ```
 
-4. **Tests**
+4. Tests
    ```csharp
    // Tests/Application.Tests/Commands/CreateUserCommandHandlerTests.cs
    [Fact]
@@ -301,7 +301,7 @@ UPDATE User:
    }
    ```
 
-## ?? Running Tests
+## Running Tests
 
 ```bash
 # All tests
@@ -314,7 +314,7 @@ dotnet test tests/Domain.Tests
 dotnet test /p:CollectCoverage=true /p:CoverageFormat=opencover
 ```
 
-## ?? Common Issues & Solutions
+## Common Issues & Solutions
 
 | Issue | Solution |
 |-------|----------|
@@ -323,22 +323,22 @@ dotnet test /p:CollectCoverage=true /p:CoverageFormat=opencover
 | Migration errors | Delete `Migrations` folder, run `dotnet ef migrations add Initial` |
 | Swagger not loading | Check API is running; navigate to `/swagger` |
 
-## ?? Technology Stack
+## Technology Stack
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| **Runtime** | .NET 8 | Modern, performant framework |
-| **Web Framework** | ASP.NET Core | HTTP server, dependency injection |
-| **ORM** | Entity Framework Core | Data access abstraction |
-| **Caching** | Redis | Distributed caching |
-| **Messaging** | MediatR | Command/query bus |
-| **Authentication** | JWT | Stateless authentication |
-| **Documentation** | Swagger/OpenAPI | API documentation |
-| **Testing** | xUnit, Moq | Unit & integration tests |
-| **Containerization** | Docker | Deployment consistency |
-| **Database** | SQL Server | Relational data store |
+| Runtime | .NET 8 | Modern, performant framework |
+| Web Framework | ASP.NET Core | HTTP server, dependency injection |
+| ORM | Entity Framework Core | Data access abstraction |
+| Caching | Redis | Distributed caching |
+| Messaging | MediatR | Command/query bus |
+| Authentication | JWT | Stateless authentication |
+| Documentation | Swagger/OpenAPI | API documentation |
+| Testing | xUnit, Moq | Unit & integration tests |
+| Containerization | Docker | Deployment consistency |
+| Database | SQL Server | Relational data store |
 
-## ?? References
+## References
 
 - [Clean Architecture by Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
@@ -346,10 +346,10 @@ dotnet test /p:CollectCoverage=true /p:CoverageFormat=opencover
 - [Entity Framework Core Docs](https://docs.microsoft.com/en-us/ef/core/)
 - [JWT Best Practices](https://tools.ietf.org/html/rfc8725)
 
-## ?? License
+## License
 
 MIT License - See LICENSE file for details.
 
 ---
 
-**Built with ?? following SOLID principles and Cloud-Native design patterns**
+Built with care following SOLID principles and Cloud-Native design patterns

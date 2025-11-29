@@ -1,14 +1,14 @@
-# ?? Running the Clean Architecture .NET 8 Web API
+# Running the Clean Architecture .NET 8 Web API
 
-## ? Application Status
+## Application Status
 
-**Build Status**: ? **SUCCESS**  
-**Tests**: ? **7/7 PASSING**  
-**Ready to Run**: ? **YES**
+**Build Status**: SUCCESS  
+**Tests**: 7/7 PASSING  
+**Ready to Run**: YES
 
 ---
 
-## ?? How to Run
+## How to Run
 
 ### Option 1: Docker Compose (Recommended - Easiest)
 
@@ -56,37 +56,37 @@ Then the app will work without any external database.
 
 ---
 
-## ?? What to Expect
+## What to Expect
 
 When the application starts successfully, you'll see:
 
 ```
-???????????????????????????????????????????????????????????
-?? Clean Architecture .NET 8 Web API
-???????????????????????????????????????????????????????????
+===========================================================
+Clean Architecture .NET 8 Web API
+===========================================================
 
-? Application started successfully!
+[SUCCESS] Application started successfully!
 
-?? API Documentation:
-   ?? Swagger: https://localhost:7001/swagger
+[INFO] API Documentation:
+   Swagger: https://localhost:7001/swagger
 
-?? Health Check:
-   ?? https://localhost:7001/health
+[INFO] Health Check:
+   https://localhost:7001/health
 
-?? Available Endpoints:
+[INFO] Available Endpoints:
    POST   /api/users              - Create a user
    GET    /api/users/{id}         - Get user (requires JWT)
    POST   /api/auth/login         - Login
    POST   /api/auth/refresh       - Refresh token
 
-???????????????????????????????????????????????????????????
+===========================================================
 ```
 
 ---
 
-## ?? Testing the API
+## Testing the API
 
-### 1. **Create a User**
+### 1. Create a User
 ```bash
 curl -X POST https://localhost:7001/api/users \
   -H "Content-Type: application/json" \
@@ -112,7 +112,7 @@ curl -X POST https://localhost:7001/api/users \
 }
 ```
 
-### 2. **Login**
+### 2. Login
 ```bash
 curl -X POST https://localhost:7001/api/auth/login \
   -H "Content-Type: application/json" \
@@ -132,14 +132,14 @@ curl -X POST https://localhost:7001/api/auth/login \
 }
 ```
 
-### 3. **Get User (Requires JWT)**
+### 3. Get User (Requires JWT)
 ```bash
 # Get the access token from login response, then:
 curl -X GET https://localhost:7001/api/users/550e8400-e29b-41d4-a716-446655440000 \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN_HERE"
 ```
 
-### 4. **Using Swagger UI**
+### 4. Using Swagger UI
 1. Navigate to: **https://localhost:7001/swagger**
 2. Click the "Authorize" button
 3. Enter your JWT token from login
@@ -147,7 +147,7 @@ curl -X GET https://localhost:7001/api/users/550e8400-e29b-41d4-a716-44665544000
 
 ---
 
-## ?? Troubleshooting
+## Troubleshooting
 
 ### Issue: "Connection refused" when starting app
 
@@ -184,48 +184,48 @@ dotnet run --project src/API/API.csproj --urls="https://localhost:8001"
 
 ---
 
-## ?? API Endpoints Reference
+## API Endpoints Reference
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
-| POST | `/api/users` | ? | Create a new user |
-| GET | `/api/users/{id}` | ? | Get user by ID |
-| POST | `/api/auth/login` | ? | Login and get tokens |
-| POST | `/api/auth/refresh` | ? | Refresh access token |
-| GET | `/health` | ? | Health check |
-| GET | `/swagger` | ? | Swagger UI documentation |
+| POST | `/api/users` | NO | Create a new user |
+| GET | `/api/users/{id}` | YES | Get user by ID |
+| POST | `/api/auth/login` | NO | Login and get tokens |
+| POST | `/api/auth/refresh` | NO | Refresh access token |
+| GET | `/health` | NO | Health check |
+| GET | `/swagger` | NO | Swagger UI documentation |
 
 ---
 
-## ?? Authentication
+## Authentication
 
 ### How JWT Works
 
-1. **Login** ? Get access token (valid 15 minutes)
-2. **Request** ? Include token in `Authorization: Bearer <token>` header
-3. **Token Expires** ? Use refresh token to get new access token
-4. **Repeat** ? Keep using refresh endpoint to maintain session
+1. **Login** - Get access token (valid 15 minutes)
+2. **Request** - Include token in `Authorization: Bearer <token>` header
+3. **Token Expires** - Use refresh token to get new access token
+4. **Repeat** - Keep using refresh endpoint to maintain session
 
 ### Test Token
 You can generate test tokens via the `/api/auth/login` endpoint.
 
 ---
 
-## ?? Next Steps
+## Next Steps
 
-1. ? Start the application (choose one method above)
-2. ? Open Swagger: **https://localhost:7001/swagger**
-3. ? Create a test user via `/api/users`
-4. ? Login via `/api/auth/login`
-5. ? Get user by ID (requires JWT from login)
-6. ? Read documentation files:
+1. [DONE] Start the application (choose one method above)
+2. [DONE] Open Swagger: **https://localhost:7001/swagger**
+3. [DONE] Create a test user via `/api/users`
+4. [DONE] Login via `/api/auth/login`
+5. [DONE] Get user by ID (requires JWT from login)
+6. [DONE] Read documentation files:
    - `README.md` - Architecture details
    - `QUICKSTART.md` - Detailed setup guide
    - `INDEX.md` - Navigation guide
 
 ---
 
-## ?? Learning Resources
+## Learning Resources
 
 **In the project:**
 - `src/Domain/` - Business logic examples
@@ -240,22 +240,22 @@ You can generate test tokens via the `/api/auth/login` endpoint.
 
 ---
 
-## ? Key Features You Can Test
+## Key Features You Can Test
 
-? **User Management** - Create and retrieve users  
-? **JWT Authentication** - Secure login with tokens  
-? **Input Validation** - Email, password requirements  
-? **Error Handling** - Consistent error responses  
-? **API Documentation** - Swagger UI  
-? **Health Checks** - System status endpoint  
-? **Role-Based Auth** - Authorization ready  
-? **Async Operations** - Non-blocking API calls  
-? **Caching Ready** - Redis integration (optional)  
-? **Database Ready** - EF Core + SQL Server  
+[DONE] User Management - Create and retrieve users  
+[DONE] JWT Authentication - Secure login with tokens  
+[DONE] Input Validation - Email, password requirements  
+[DONE] Error Handling - Consistent error responses  
+[DONE] API Documentation - Swagger UI  
+[DONE] Health Checks - System status endpoint  
+[DONE] Role-Based Auth - Authorization ready  
+[DONE] Async Operations - Non-blocking API calls  
+[DONE] Caching Ready - Redis integration (optional)  
+[DONE] Database Ready - EF Core + SQL Server  
 
 ---
 
-## ?? Support
+## Support
 
 | Need | File |
 |------|------|
@@ -268,7 +268,7 @@ You can generate test tokens via the `/api/auth/login` endpoint.
 
 ---
 
-## ? Checklist Before Running
+## Checklist Before Running
 
 - [ ] .NET 8 SDK installed
 - [ ] You're in the `clean-architecture-dotnet-api/` directory
@@ -278,9 +278,9 @@ You can generate test tokens via the `/api/auth/login` endpoint.
 
 ---
 
-**Status**: ? **Ready to Run**
+**Status**: Ready to Run
 
-Pick one method above and get started! ??
+Pick one method above and get started!
 
 ---
 
