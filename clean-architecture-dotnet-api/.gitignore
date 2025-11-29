@@ -1,0 +1,43 @@
+# IDE
+.vs/
+.vscode/
+*.swp
+*.swo
+*~
+.idea/
+
+# Build
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# Entity Framework
+*.db
+*.db-shm
+*.db-wal
+Migrations/
+
+# Environment
+.env
+.env.local
+appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+*.coverage
+OpenCover/
+
+# Logs
+logs/
+*.log
